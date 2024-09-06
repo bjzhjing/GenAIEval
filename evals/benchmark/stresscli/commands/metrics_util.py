@@ -116,8 +116,8 @@ def calculate_diff(start_dir, end_dir, output_dir, services=None):
         services = [services]
 
     for service_name in services:
-        # Create a regex pattern to match files starting with the service_name followed by a non-alphanumeric character
-        pattern = rf"^{re.escape(service_name)}[^a-zA-Z].*\.txt$"
+        # Create a regex pattern to match files starting with the service_name followed by symbol @
+        pattern = rf'^{re.escape(service_name)}@.*\.txt$'
 
         start_service_files = [f for f in start_files if re.match(pattern, f)]
         end_service_files = [f for f in end_files if re.match(pattern, f)]
@@ -198,7 +198,7 @@ if __name__ == "__main__":
     start_dir = "/path/to/data/start"
     end_dir = "/path/to/data/end"
     output_dir = "/path/to/data"
-    services = ["chatqna-tgi", "chatqna-tei", "chatqna-teirerank", "chatqna-xeon-backend"]
+    services=["llm-tgi-server", "retriever-redis-server", "embedding-tei-server", "tei-embedding-server", "tgi-service", "tei-reranking-server"]
     json_output = "/path/to/data/metrics.log"
 
     export_metric(start_dir, end_dir, output_dir, json_output, services)

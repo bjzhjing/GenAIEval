@@ -3,14 +3,23 @@
 
 test_suite_config: # Overall configuration settings for the test suite
   examples: ["chatqna"]  # The specific test cases being tested, e.g., chatqna, codegen, codetrans, faqgen, audioqna, visualqna
-  deployment_type: "k8s"  # Default is "k8s", can also be "docker"
-  service_ip: None  # Leave as None for k8s, specify for Docker
-  service_port: None  # Leave as None for k8s, specify for Docker
+  deployment_type: "docker"  # Default is "k8s", can also be "docker"
+  service_ip: localhost  # Leave as None for k8s, specify for Docker
+  service_port: 8888  # Leave as None for k8s, specify for Docker
   concurrent_level: 4  # The concurrency level, adjustable based on requirements
   user_queries: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]  # Number of test requests at each concurrency level
   random_prompt: false  # Use random prompts if true, fixed prompts if false
   run_time: 60m  # The max total run time for the test suite
-  collect_service_metric: false  # Collect service metrics if true, do not collect service metrics if false
+  collect_service_metric: true  # Collect service metrics if true, do not collect service metrics if false
+  service-list: # Fill the service name for k8s or container name for Docker, vector database collection is not supported yet
+    - "chatqna-xeon-backend-server"
+    - "llm-tgi-server"
+    - "retriever-redis-server"
+    - "embedding-tei-server"
+    - "reranking-tei-xeon-server"
+    - "tei-embedding-server"
+    - "tgi-service"
+    - "tei-reranking-server"
   data_visualization: false # Generate data visualization if true, do not generate data visualization if false
   llm_model: "Intel/neural-chat-7b-v3-3"  # The LLM model used for the test
   test_output_dir: "/home/sdp/benchmark_output"  # The directory to store the test output
