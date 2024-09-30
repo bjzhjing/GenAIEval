@@ -1,0 +1,9 @@
+# config.yaml
+
+# Namespace to be used for all services
+namespace: "verify-scale"
+
+# Configuration for each service
+services:
+  llm-dependency-deploy:
+    replicas: 4  # Number of replicas for llm-dependency-deploy
